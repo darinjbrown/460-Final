@@ -111,26 +111,43 @@ void FunctionCallStatement::print(){
 }
 
 // AssignmentStatement
-AssignmentStatement::AssignmentStatement() : _lhsVariable{""}, _rhsExpression{nullptr} {}
+AssignmentStatement::AssignmentStatement() : _lhsVariable{""}, _rhsExpression{nullptr},
+        _arrayIndex{nullptr}, _isArray{false}, _testList{nullptr}, _isArrayInit{false} {}
 
 
 AssignmentStatement::AssignmentStatement(std::string lhsVar, ExprNode *rhsExpr):
         _lhsVariable{lhsVar}, _rhsExpression{rhsExpr} {}
 
+AssignmentStatement::AssignmentStatement(std::string lhsVar, ExprNode* arrayIndex, std::vector<ExprNode*> testList):
+    _lhsVariable{lhsVar}, _arrayIndex{arrayIndex} {}
+
 // values have already been parsed and confirmed? (assumption)
 void AssignmentStatement::evaluate(SymTab &symTab, Functions &funcTab) {
-    std::shared_ptr<TypeDescriptor> rhs = rhsExpression()->evaluate(symTab, funcTab);
-
-    symTab.setValueFor( lhsVariable() , rhs);
+    if (_isArray == false){
+        std::shared_ptr<TypeDescriptor> rhs = rhsExpression()->evaluate(symTab, funcTab);
+        symTab.setValueFor( lhsVariable() , rhs);
+    }
+    //TODO: finish this after parsing of array assignment done
+    else if(_isArrayInit == false){ // assignment of a test into an index of the array
+        std::shared_ptr<TypeDescriptor> rhs = rhsExpression()->evaluate(symTab, funcTab);
+        symTab.setValueFor(lhsVariable(arrayIndex()->evaluate(symTab, funcTab)), rhs)
+    }
+    //TODO: if (_isArrayInit) implement array initialization with a loop? (vname[test] = testList)
 }
 
 std::string &AssignmentStatement::lhsVariable() {
     return _lhsVariable;
 }
 
+std::string &AssignmentStatement::lhsVariable(int index) {
+    return _lhsVariable;
+}
+
 ExprNode *&AssignmentStatement::rhsExpression() {
     return _rhsExpression;
 }
+
+//ExprNode *&
 void AssignmentStatement::print() {
     std::cout << _lhsVariable << " = ";
     _rhsExpression->print();

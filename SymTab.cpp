@@ -44,7 +44,21 @@ void SymTab::closeScope(){
 void SymTab::setValueFor(std::string varName, std::shared_ptr<TypeDescriptor> typeDescriptorPtr) {
     // Define a variable by setting its initial value.
     std::cout << "Setting value for " << varName << ": ";
-    if(typeDescriptorPtr->type() == TypeDescriptor::INTEGER){
+    if(typeDescriptorPtr->type() == TypeDescriptor::VECTOR){
+        std::shared_ptr<VectorTypeDescriptor> vec_ptr = std::dynamic_pointer_cast<VectorTypeDescriptor>(typeDescriptorPtr);
+        if(vec_ptr){
+            if(vec_ptr->_array) std::cout << "Array is " << vec_ptr->_array << std::endl;
+            std::shared_ptr<VectorTypeDescriptor> new_ptr;
+            new_ptr = std::make_shared<VectorTypeDescriptor>(TypeDescriptor::VECTOR);
+            if(!new_ptr->_array){
+                std::vector<TypeDescriptor*> newArray;//TODO: check to see if pointers matc and are as intended..._array is vector<TypeDescriptor*>*
+                new_ptr->_array = &newArray;
+            }
+
+
+        }
+    }
+    else if(typeDescriptorPtr->type() == TypeDescriptor::INTEGER){
         //std::cout << "setValueFor detected an " << typeDescriptorPtr->type() << std::endl;
         //std::shared_ptr<NumberTypeDescriptor> nbr_ptr = std::dynamic_pointer_cast<NumberTypeDescriptor>(typeDescriptorPtr);
         std::shared_ptr<NumberTypeDescriptor> nbr_ptr = std::dynamic_pointer_cast<NumberTypeDescriptor>(typeDescriptorPtr);
@@ -104,6 +118,7 @@ std::shared_ptr<TypeDescriptor> SymTab::getValueFor(std::string vName) {
             return str_ptr;
         }
     }
+    //TODO: implement setValue for an element of an array
     else{
         std::cout << "Problem with SymTab::getValueFor()\n";
     }

@@ -1,13 +1,15 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ExprInter.dir/main.cpp.o"
-  "CMakeFiles/ExprInter.dir/Token.cpp.o"
-  "CMakeFiles/ExprInter.dir/Tokenizer.cpp.o"
-  "CMakeFiles/ExprInter.dir/Parser.cpp.o"
-  "CMakeFiles/ExprInter.dir/ExprNode.cpp.o"
-  "CMakeFiles/ExprInter.dir/SymTab.cpp.o"
-  "CMakeFiles/ExprInter.dir/Statements.cpp.o"
+  "CMakeFiles/ExprInter.dir/main.cpp.obj"
+  "CMakeFiles/ExprInter.dir/Token.cpp.obj"
+  "CMakeFiles/ExprInter.dir/Tokenizer.cpp.obj"
+  "CMakeFiles/ExprInter.dir/Parser.cpp.obj"
+  "CMakeFiles/ExprInter.dir/ExprNode.cpp.obj"
+  "CMakeFiles/ExprInter.dir/SymTab.cpp.obj"
+  "CMakeFiles/ExprInter.dir/Statements.cpp.obj"
   "ExprInter.pdb"
-  "ExprInter"
+  "ExprInter.exe"
+  "ExprInter.exe.manifest"
+  "libExprInter.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

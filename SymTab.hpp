@@ -35,6 +35,7 @@ struct TypeDescriptor {
 
 private:
     types _type;
+    bool _isArray;
 };
 
 struct NumberTypeDescriptor: public TypeDescriptor {
@@ -64,11 +65,12 @@ struct VectorTypeDescriptor: public TypeDescriptor{
   void append(TypeDescriptor newElement);
   void setElement(int index, TypeDescriptor newElement);
   void initializeArray(std::string name, std::vector<TypeDescriptor> initialValues);
+  std::vector<TypeDescriptor*>* _array;
 
  private:
     types _elementType;
     types _type;
-    std::vector<TypeDescriptor>* _array;
+
 
 };
 

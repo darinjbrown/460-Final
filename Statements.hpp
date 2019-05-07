@@ -149,9 +149,17 @@ public:
 
     AssignmentStatement();
     AssignmentStatement(std::string lhsVar, ExprNode *rhsExpr);
+    AssignmentStatement(std::string lhsVar, ExprNode* arrayIndex, std::vector<ExprNode*> testList);
+
 
     std::string &lhsVariable();
+    std::string &lhsVariable(int index);
     ExprNode *&rhsExpression();
+    ExprNode *&arrayIndex();
+    bool _isArray;
+    bool _isArrayInit;
+    ExprNode* _arrayIndex;
+    std::vector<TypeDescriptor*> _testList;
 
     virtual void evaluate(SymTab &symTab, Functions &funcTab);
     virtual void print();
