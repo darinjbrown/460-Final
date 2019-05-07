@@ -40,25 +40,46 @@ void SymTab::closeScope(){
     _currentScope = scopeStack.size() - 1;
 }
 
+//TODO: complete
+// used to initialize an array
+void SymTab::fillArray(std::string varName, ){
+
+}
+
+void SymTab::setValueFor(std::string varName, int arrayIndex, std::shared_ptr<TypeDescriptor> typeDescriptorPtr){
+    if(typeDescriptorPtr->type() != TypeDescriptor::VECTOR){
+        std::cout << "SymTab::setValueFor (string, int, shared_ptr<TD> Error, 3 arguments "
+                     "passed to non-VectorTypeDescriptor" << std::endl;
+        exit(-1);
+    }
+
+    else{
+        std::cout << "Setting value for " << varName << " at element " << arrayIndex << " :";
+
+        std::shared_ptr<VectorTypeDescriptor> vec_ptr = std::dynamic_pointer_cast<VectorTypeDescriptor>(typeDescriptorPtr);
+
+        if(isDefined(varName)){
+            if(vec_ptr->_array->at(arrayIndex) != nullptr){
+                std::cout << "changing value of " << varName << " at " << arrayIndex << " from " <<
+
+                vec_ptr->_array->at(arrayIndex) =
+            }
+//            if(vec_ptr->_array) std::cout << "Array element "<< arrayiis " << vec_ptr->_array << std::endl;
+//            std::shared_ptr<VectorTypeDescriptor> new_ptr;
+//            new_ptr = std::make_shared<VectorTypeDescriptor>(TypeDescriptor::VECTOR);
+//            if(!new_ptr->_array){
+//                std::vector<TypeDescriptor*> newArray;//TODO: check to see if pointers match and are as intended..._array is vector<TypeDescriptor*>*
+//                new_ptr->_array = &newArray;
+//            }
+
+
+        }
+}
 // used by assignment and function definition statements
 void SymTab::setValueFor(std::string varName, std::shared_ptr<TypeDescriptor> typeDescriptorPtr) {
     // Define a variable by setting its initial value.
     std::cout << "Setting value for " << varName << ": ";
-    if(typeDescriptorPtr->type() == TypeDescriptor::VECTOR){
-        std::shared_ptr<VectorTypeDescriptor> vec_ptr = std::dynamic_pointer_cast<VectorTypeDescriptor>(typeDescriptorPtr);
-        if(vec_ptr){
-            if(vec_ptr->_array) std::cout << "Array is " << vec_ptr->_array << std::endl;
-            std::shared_ptr<VectorTypeDescriptor> new_ptr;
-            new_ptr = std::make_shared<VectorTypeDescriptor>(TypeDescriptor::VECTOR);
-            if(!new_ptr->_array){
-                std::vector<TypeDescriptor*> newArray;//TODO: check to see if pointers matc and are as intended..._array is vector<TypeDescriptor*>*
-                new_ptr->_array = &newArray;
-            }
-
-
-        }
-    }
-    else if(typeDescriptorPtr->type() == TypeDescriptor::INTEGER){
+    if(typeDescriptorPtr->type() == TypeDescriptor::INTEGER){
         //std::cout << "setValueFor detected an " << typeDescriptorPtr->type() << std::endl;
         //std::shared_ptr<NumberTypeDescriptor> nbr_ptr = std::dynamic_pointer_cast<NumberTypeDescriptor>(typeDescriptorPtr);
         std::shared_ptr<NumberTypeDescriptor> nbr_ptr = std::dynamic_pointer_cast<NumberTypeDescriptor>(typeDescriptorPtr);

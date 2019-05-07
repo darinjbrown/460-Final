@@ -79,6 +79,7 @@ public:
     SymTab();
 
     void setValueFor(std::string vName, std::shared_ptr<TypeDescriptor>);
+    void setValueFor(std::string vName, int, std::shared_ptr<TypeDescriptor>); // for array element assignment
 
     bool isDefined(std::string vName);
     std::shared_ptr<TypeDescriptor> getValueFor(std::string vName);
