@@ -114,6 +114,7 @@ PrintStatement *Parser::print_statement(){
     return new PrintStatement(rightHandSideExpressions);
 
 }
+//TODO: finish modifying assignment statement for arrays
 
 // and assignemnt statement never shows up on the right side
 AssignmentStatement *Parser::assign_statement() {
@@ -122,9 +123,9 @@ AssignmentStatement *Parser::assign_statement() {
     if (!nameTok.isName())
         die("Parser::assign_statement", "Expected a name token, instead got", nameTok);
 
-    Token assignOp = tokenizer.getToken();
-    if (!assignOp.isAssignmentOperator())
-        die("Parser::assign_statement", "Expected an equal sign, instead got", assignOp);
+    Token assignOpOrOpenBracket = tokenizer.getToken();
+    if (!assignOpOrOpenBracket.isAssignmentOperator() || (!assignOpOrOpenBracket.isOpenBrackets() && assignOpOrOpenBracket.isArray()))
+            die("Parser::assign_statement", "Expected an equal sign or open bracket, instead got", assignOpOrOpenBracket);
 
 
     ExprNode *rightHandSideExpr = test();
@@ -758,19 +759,47 @@ ExprNode *Parser::arith_expr() {
 
 ExprNode *Parser::term() {
     // This function parses the grammar rules:
-    // However, the implementation makes the <mult-op> left associative.
-    ExprNode *left = atom();
+    // However, the implementation makes the <mult-op> left associate.
+    ExprNode *left = factor();
     Token tok = tokenizer.getToken();
 
     while (tok.isMultiplicationOperator() || tok.isDivisionOperator() || tok.isIntegerDivisionOperator() || tok.isModuloOperator()) {
         InfixExprNode *p = new InfixExprNode(tok);
         p->left() = left;
-        p->right() = atom();
+        p->right() = factor();
         left = p;
         tok = tokenizer.getToken();
     }
     tokenizer.ungetToken();
     return left;
+}
+
+ExprNode *Parser::factor() {
+    //this function passes grammar rules
+    // {'-'} factor | atom | call | subscription | array_len
+    Token tok = tokenizer.getToken();
+    int o = 0;
+    while(tok.isSubtractionOperator()){
+        o++;
+        tok = tokenizer.getToken();
+    }
+    tokenizer.ungetToken();
+    tok = tokenizer.getToken();
+    if(tok.isSubtractionOperator()){
+        tok.setNegSign(o%2);
+        InfixExprNode *p = new InfixExprNode(tok);
+    }
+    else {
+        ExprNode *left = new InfixExprNode(tok);
+        while (tok.isOpenBrackets()){
+            if(left->token().isArray()){ // is subscription because initialized already parsed
+
+            }
+
+        }
+
+    }
+
 }
 
 ExprNode *Parser::atom() {

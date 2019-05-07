@@ -67,6 +67,7 @@ public:
                 isEqualCompairson() ||
                 isNotEqualCompairson();
     }
+    bool isArray() const     { return _isArray; }
     bool isBooleanOr() const { return _name == "or"; }
     bool isBooleanAnd() const { return _name == "and"; }
     bool isBooleanNot() const { return _name == "not"; }
@@ -173,6 +174,7 @@ private:
     //bool _isDouble;
     bool _isBoolean;
 
+    bool _isArray;
     bool _isString;
 
     bool _isFuncName;

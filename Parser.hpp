@@ -34,7 +34,7 @@ public:
     // 'print' [ testlist ]
     PrintStatement* print_statement();
 
-    // ID '=' test
+    // ID | subscription '=' test
     AssignmentStatement *assign_statement();
 
     Statement *compound_statement();

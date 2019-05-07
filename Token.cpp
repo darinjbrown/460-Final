@@ -34,6 +34,7 @@ void Token::print() const {
     else if( isBooleanOr() ) std::cout << " or ";
     else if( isBooleanAnd() ) std::cout << " and ";
     else if( isBooleanNot() ) std::cout << " not ";
+    else if( isArray() ) std::cout << getName();
     else if( isName() )  std::cout << getName();
     else if( isInteger() ) std::cout << getInteger();
     //else if( isFloat() ) std::cout << getFloat();

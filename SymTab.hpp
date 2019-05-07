@@ -25,7 +25,7 @@ struct TypeDescriptor {
     // The base class for datatype descriptors.
 
     // This enum can expand to include additional types.
-    enum types {INTEGER, BOOL, STRING};  
+    enum types {INTEGER, BOOL, STRING, VECTOR};
 
     TypeDescriptor(types type): _type{type} {}
 
@@ -55,6 +55,21 @@ struct StringTypeDescriptor: public TypeDescriptor {
 
     StringTypeDescriptor(types descType):  TypeDescriptor(descType) {}
     std::string stringValue;
+};
+
+struct VectorTypeDescriptor: public TypeDescriptor{
+  VectorTypeDescriptor(types descType): TypeDescriptor(descType){}
+  std::string _name;
+
+  void append(TypeDescriptor newElement);
+  void setElement(int index, TypeDescriptor newElement);
+  void initializeArray(std::string name, std::vector<TypeDescriptor> initialValues);
+
+ private:
+    types _elementType;
+    types _type;
+    std::vector<TypeDescriptor>* _array;
+
 };
 
 class SymTab {

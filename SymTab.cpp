@@ -145,6 +145,21 @@ void printValue(std::shared_ptr<TypeDescriptor>desc) {
     std::cout << "Problem with SymTab::Print() function.";
 }
 
+void VectorTypeDescriptor::append(TypeDescriptor, newElement){
+    _array->push_back(newElement);
+}
+
+void VectorTypeDescriptor::setElement(int index, TypeDescriptor newElement){
+    _array->at(index) = newElement;
+}
+
+void VectorTypeDescriptor::initializeArray(std::string name1, std::vector<TypeDescriptor> initialValues){
+    std::vector<TypeDescriptor> name;
+    for(int i = 0; i < initialValues.size(); i++){
+        name.push_back(initialValues[i]);
+    }
+}
+
 /*
 
 // function class
