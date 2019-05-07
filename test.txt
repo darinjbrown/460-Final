@@ -1,0 +1,11 @@
+def foo():
+    print "hello"
+
+foo(1,2,3)
+
+a = 1 + 2
+
+if a == 3:
+    print "THELA HUN GINJEET"
+
+b = 2 - 1

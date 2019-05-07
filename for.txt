@@ -1,0 +1,40 @@
+
+foo(1)
+
+def bar():
+    print 1
+    if a == 3:
+        print "THELA HUN GINJEET"
+
+
+
+
+a = 0
+z = 2
+y = 4
+x = 6
+
+if a == 3:
+    print "THELA HUN GINJEET"
+elif a == 2:
+    print "THEY HELD A GUN TO ME"
+    print "AND I SAID.... OH NO"
+else:
+    print "THIS IS A DANGEROUS PLACE"
+    for i in range(5):
+        print "THIS PRINTS FIVE TIMES"
+        if a != 1:
+            if a == 0:
+                print "YOU BEAUTIFUL BASTARD"
+        print "5 Times, this you see"
+
+for i in range(1):
+    print "EFF YASELF"
+
+
+result = y + z - x + a
+result = a + z + a * x
+
+print z
+print y
+print x

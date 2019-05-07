@@ -1,0 +1,4 @@
+TO DO:
+
+1. How to detect a new line?
+    - tokenzier can check the most recent token at the top of getToken() and determine if there is a new line
