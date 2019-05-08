@@ -33,6 +33,7 @@ struct TypeDescriptor {
 
     virtual ~TypeDescriptor() {}
 
+
 private:
     types _type;
     bool _isArray;
@@ -81,6 +82,7 @@ public:
     void setValueFor(std::string vName, std::shared_ptr<TypeDescriptor>);
     void setValueFor(std::string vName, int, std::shared_ptr<TypeDescriptor>); // for array element assignment
 
+    std::shared_ptr<TypeDescriptor> getTypeDescriptor(std::string, SymTab);
     bool isDefined(std::string vName);
     std::shared_ptr<TypeDescriptor> getValueFor(std::string vName);
     //std::shared_ptr<TypeDescriptor> getReturnValue() const {return _returnValue;}
