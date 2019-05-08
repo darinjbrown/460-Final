@@ -509,6 +509,26 @@ std::shared_ptr<TypeDescriptor> Variable::evaluate(SymTab &symTab, Functions &fu
     return td_ptr;
 }
 
+//Vector node
+Vector::Vector(Token token): ExprNode{token} {}
+
+void Vector::print(){
+    std::cout << token().getName();
+    std::cout << " contains: [";
+    for(auto a : _arrayElements){
+        a->print();
+        std::cout << ", ";
+    }
+    std::cout << "]\n";
+}
+
+std::shared_ptr<TypeDescriptor> Vector::evaluate(SymTab &symTab, Function &funcTab) {
+
+    std::vector<std::shared_ptr<TypeDescriptor> > arrayName;
+    std::shared_ptr<VectorTypeDescriptor> vec_ptr = std::make_shared<VectorTypeDescriptor>(TypeDescriptor::VECTOR);
+    vec_ptr->_array = arrayName;
+    return vec_ptr;
+}
 
 // token is the function name
 // this needs to be a self-contained call, since it can appear outside of a call statement

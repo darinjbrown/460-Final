@@ -149,7 +149,7 @@ public:
 
     AssignmentStatement();
     AssignmentStatement(std::string lhsVar, ExprNode *rhsExpr);
-    AssignmentStatement(std::string lhsVar, ExprNode* arrayIndex, std::vector<ExprNode*> testList);
+    AssignmentStatement(std::string lhsVar, std::shared_ptr<TypeDescriptor> arrayIndex, std::vector<ExprNode*> testList);
 
 
     std::string &lhsVariable();

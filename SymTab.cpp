@@ -42,9 +42,7 @@ void SymTab::closeScope(){
 
 //TODO: complete
 // used to initialize an array
-void SymTab::fillArray(std::string varName, ){
 
-}
 
 void SymTab::setValueFor(std::string varName, int arrayIndex, std::shared_ptr<TypeDescriptor> typeDescriptorPtr) {
     if (typeDescriptorPtr->type() != TypeDescriptor::VECTOR) {
@@ -52,31 +50,16 @@ void SymTab::setValueFor(std::string varName, int arrayIndex, std::shared_ptr<Ty
                      "passed to non-VectorTypeDescriptor" << std::endl;
         exit(-1);
     } else {
-        std::cout << "Setting value for " << varName << " at element " << arrayIndex << " to " <<
-            ;
+        std::cout << "Setting value for " << varName << " at element " << arrayIndex << " to " << std::endl;
 
         //std::shared_ptr<VectorTypeDescriptor> vec_ptr = std::dynamic_pointer_cast<VectorTypeDescriptor>(typeDescriptorPtr);
         std::shared_ptr<TypeDescriptor> genericTypeDescriptor_ptr = getValueFor(varName);
         std::shared_ptr<VectorTypeDescriptor> vec_ptr = std::dynamic_pointer_cast<VectorTypeDescriptor>(
                 genericTypeDescriptor_ptr);
-        vec_ptr->_array->at(arrayIndex) = typeDescriptorPtr;
-        if (isDefined(varName)) {
-//            if (vec_ptr->_array->at(arrayIndex) != nullptr) {
-//                std::cout << "changing value of " << varName << " at " << arrayIndex << " from " <<
-//
-//                          vec_ptr->_array->at(arrayIndex) =
-//            }
-////            if(vec_ptr->_array) std::cout << "Array element "<< arrayiis " << vec_ptr->_array << std::endl;
-//            std::shared_ptr<VectorTypeDescriptor> new_ptr;
-//            new_ptr = std::make_shared<VectorTypeDescriptor>(TypeDescriptor::VECTOR);
-//            if(!new_ptr->_array){
-//                std::vector<TypeDescriptor*> newArray;//TODO: check to see if pointers match and are as intended..._array is vector<TypeDescriptor*>*
-//                new_ptr->_array = &newArray;
-//            }
+        vec_ptr->_array.at(arrayIndex) = genericTypeDescriptor_ptr;
 
-
-        }
-    }}
+    }
+}
 // used by assignment and function definition statements
 void SymTab::setValueFor(std::string varName, std::shared_ptr<TypeDescriptor> typeDescriptorPtr) {
     // Define a variable by setting its initial value.
@@ -145,7 +128,7 @@ std::shared_ptr<TypeDescriptor> SymTab::getValueFor(std::string vName) {
     } else if(ptr->type() == TypeDescriptor::VECTOR) {
            std::shared_ptr<VectorTypeDescriptor> vec_ptr;
            if(vec_ptr){
-               std::cout << "SymTab::getValueFor: " << vName << " contains " << vec_ptr->_array->at(0) <<
+               std::cout << "SymTab::getValueFor: " << vName << " contains " << vec_ptr->_array.at(0) <<
                " in element 0.\n";
                return vec_ptr;
            }
@@ -193,21 +176,15 @@ void printValue(std::shared_ptr<TypeDescriptor> desc) {
 //    _array->push_back(newElement);
 //}
 
-void VectorTypeDescriptor::setElement(int index, TypeDescriptor newElement) {
-    _array->at(index) = newElement;
+void VectorTypeDescriptor::setElement(int index, std::shared_ptr<TypeDescriptor> newElement) {
+    _array.at(index) = newElement;
 }
 
-void VectorTypeDescriptor::initializeArray(std::string name1, std::vector<TypeDescriptor> initialValues) {
-    std::vector<TypeDescriptor> name;
-    for (int i = 0; i < initialValues.size(); i++) {
-        name.push_back(initialValues[i]);
-    }
-}
 
-std::shared_ptr<TypeDescriptor> SymTab::getTypeDescriptor(std::string arrayName, SymTab symTab) {
-    std::shared_ptr<TypeDescriptor> ptr = symTab.find(arrayName)->second;
-    return ptr;
-}
+//std::shared_ptr<TypeDescriptor> SymTab::getTypeDescriptor(std::string arrayName, SymTab symTab) {
+//    std::shared_ptr<TypeDescriptor> ptr = symTab.find(arrayName)->second;
+//    return ptr;
+//}
 
 
 /*

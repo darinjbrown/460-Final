@@ -785,8 +785,8 @@ ExprNode *Parser::factor() {
     }
     tokenizer.ungetToken();
     tok = tokenizer.getToken();
-    if(tok.isSubtractionOperator()){
-        tok.setNegSign(o%2);
+    if(tok.isSubtractionOperator()){ //TODO: (nice to have) finish implementing negative numbers
+        //tok.setNegSign(o%2);
         InfixExprNode *p = new InfixExprNode(tok);
     }
     else {

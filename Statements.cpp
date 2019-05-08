@@ -130,8 +130,10 @@ void AssignmentStatement::evaluate(SymTab &symTab, Functions &funcTab) {
     //TODO: finish this after parsing of array assignment done and symtab structure complete
     else if(_isArrayInit == false){ // assignment of a test into an index of the array
         std::shared_ptr<TypeDescriptor> rhs = rhsExpression()->evaluate(symTab, funcTab);
-        int *arrayIndex = arrayIndex()->evaluate(symTab, funcTab);
-        symTab.setValueFor(lhsVariable(), arrayIndex, rhs);
+        std::shared_ptr<TypeDescriptor> arrayIndexGenPtr = arrayIndex()->evaluate(symTab, funcTab);
+
+        int arrayIndexInt = //arrayIndex()->evaluate(symTab, funcTab); //TODO: fix arrayIndex retrieval and type
+        symTab.setValueFor(lhsVariable(), arrayIndexInt, rhs);
     }
     //TODO: if (_isArrayInit) implement array initialization with a loop? (vname[test] = testList)
 }
@@ -140,7 +142,7 @@ std::string &AssignmentStatement::lhsVariable() {
     return _lhsVariable;
 }
 
-ExprNode* &AssignmentStatement::arrayIndex() {
+ExprNode *&AssignmentStatement::arrayIndex() {
     return _arrayIndex;
 }
 

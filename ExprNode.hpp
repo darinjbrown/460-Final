@@ -8,6 +8,7 @@
 #include "Token.hpp"
 #include "SymTab.hpp"
 #include "Functions.hpp"
+#include "Statements.hpp"
 #include <memory>
 
 //Classes in this file define the internal representation of arithmetic expressions.
@@ -116,6 +117,14 @@ public:
     Variable(Token token);
     virtual void print();
     virtual std::shared_ptr<TypeDescriptor> evaluate(SymTab &symTab, Functions &funcTab);
+};
+
+class Vector: public ExprNode{
+public:
+    Vector(Token token);
+    virtual void print();
+    virtual std::shared_ptr<TypeDescriptor> evaluate(SymTab &symTab, Function &funcTab);
+    std::vector<ExprNode*> _arrayElements;
 };
 
 #include "Statements.hpp"

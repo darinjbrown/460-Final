@@ -64,9 +64,8 @@ struct VectorTypeDescriptor: public TypeDescriptor{
   std::string _name;
 
   void append(TypeDescriptor newElement);
-  void setElement(int index, TypeDescriptor newElement);
-  void initializeArray(std::string name, std::vector<TypeDescriptor> initialValues);
-  std::vector<TypeDescriptor*>* _array;
+  void setElement(int index, std::shared_ptr<TypeDescriptor> newElement);
+  std::vector<std::shared_ptr<TypeDescriptor> > _array;
 
  private:
     types _elementType;
@@ -80,7 +79,7 @@ public:
     SymTab();
 
     void setValueFor(std::string vName, std::shared_ptr<TypeDescriptor>);
-    void setValueFor(std::string vName, int, std::shared_ptr<TypeDescriptor>); // for array element assignment
+    void setValueFor(std::string vName, int, std::shared_ptr<TypeDescriptor>  ); // for array element assignment
 
     std::shared_ptr<TypeDescriptor> getTypeDescriptor(std::string, SymTab);
     bool isDefined(std::string vName);

@@ -112,6 +112,9 @@ public:
         _integer = n;
         isInteger() = true;
     }
+//    void setNegSign(){
+//        bool _negSign;
+//    };
     /*
     bool &isFloat()             { return _isFloat;}
     bool isFloat()  const       { return _isFloat;}
@@ -129,7 +132,7 @@ public:
     }
     */
     
-    bool getBoolean() const      {return _boolean;}
+    bool getBoolean() const      { return _boolean;}
     void setBoolean(bool b) {
         _boolean = b;
         _isBoolean = true;
