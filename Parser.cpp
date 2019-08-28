@@ -1,5 +1,5 @@
 
-/*  The majority of the work is done by the class 'convert'.
+/*   
     This class builds an expression tree using the input infix
     expression.  A post-order traversal of the expression tree 'dumps'
     it into an array in postfix form.  The iterator copies the token
